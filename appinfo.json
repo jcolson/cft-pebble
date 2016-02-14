@@ -1,0 +1,57 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "jay@karma.net",
+    "longName": "Crossfit Threefold",
+    "projectType": "pebblejs",
+    "resources": {
+        "media": [
+            {
+                "file": "images/menu_icon.png",
+                "name": "IMAGE_MENU_ICON",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/logo_splash.png",
+                "name": "IMAGE_LOGO_SPLASH",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/tile_splash.png",
+                "name": "IMAGE_TILE_SPLASH",
+                "type": "bitmap"
+            },
+            {
+                "file": "fonts/UbuntuMono-Regular.ttf",
+                "name": "MONO_FONT_14",
+                "type": "font"
+            },
+            {
+                "file": "images/3f-logo-new-28px.png",
+                "menuIcon": true,
+                "name": "IMAGES_3F_LOGO_NEW_28PX_PNG",
+                "type": "bitmap"
+            },
+            {
+                "file": "images/3f-logo-new-50px.png",
+                "name": "IMAGES_3F_LOGO_NEW_50PX_PNG",
+                "type": "bitmap"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Crossfit Threefold",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "4364b8e2-3aa8-42f5-ba8d-b12d8d2d00ee",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "hiddenApp": false,
+        "watchface": false
+    }
+}
