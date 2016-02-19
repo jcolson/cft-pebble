@@ -54,22 +54,64 @@ if (topicValue === null) {
 } else {
   console.log('retreived topic from storage!');
 }
+var main;
+  var result = '';
+  var theDate = new Date();
+  var month = getMonthName(theDate.getMonth());
+var tomorrow = 0;
+if (theDate.getHours() >= 20) {
+  tomorrow=1;
+}
+  var date = pad(theDate.getDate()+tomorrow,2);
+  var URL='http://beyondthewhiteboard.com/gyms/4860-crossfit-threefold/'+theDate.getFullYear()+'/'+month+'/'+date+'.atom';
+console.log('URL: '+URL);
+// Show splash
+  var splashCard = new UI.Card({
+    title: "Please Wait",
+    body: "Downloading..."
+  });
+  splashCard.show();
+  // Download data
+  ajax({url: URL},//, type: 'string'},
+    function(document) {
+      var i;
+      var resultArray = document.match(/<\/btwb:assigned>([^]*?)<summary>([^]*?)<\/summary>/mg);
+      console.log("array size: "+resultArray.length);
+      for (i = 0 ; i < resultArray.length; i++) {
+        var wod = resultArray[i].substr(31);
+        wod = wod.substr(0,wod.length-10);
+        console.log(i+': '+ wod);
+        result = result + wod;
+        if (i < resultArray.length-1) {
+          result = result + '\nAND THEN:\n';
+        }
+      }	
+      
+      main = new UI.Card({
+        title: theDate.getFullYear()+'/'+theDate.getMonth()+'/'+theDate.getDate(),
+        icon: 'images/3f-logo-new-50px.png',
+        //subtitle: theDate.getFullYear()+'/'+theDate.getMonth()+'/'+theDate.getDate(),
+        //body: bodyText,
+        body: result,
+        subtitleColor: 'indigo', // Named colors
+        bodyColor: '#9a0036', // Hex colors
+        scrollable: true
+      });
+      
+      // Show results, remove splash card
+      //resultsCard.show();
+      //splashCard.hide();
+      main.show();
+      splashCard.hide();
+    },
+    function(error) {
+      console.log('Ajax failed: ' + error);
+    }
+  );
 
-var main = new UI.Card({
-  title: 'Crossfit 3 Fold 1.1',
-  icon: 'images/3f-logo-new-50px.png',
-  //subtitle: 'Welcome',
-  body: bodyText,
-  subtitleColor: 'indigo', // Named colors
-  bodyColor: '#9a0036' // Hex colors
-});
-main.show();
-//}
 
-
-
+/**
 main.on('click', 'select', function(e) {
-  console.log('clicked');
   var theDate = new Date();
   var month = getMonthName(theDate.getMonth());
   var date = pad(theDate.getDate(),2);
@@ -112,6 +154,7 @@ main.on('click', 'select', function(e) {
     }
   );
 });
+*/
 
 // pad number
 function pad(num, size) {
@@ -138,7 +181,7 @@ function getMonthName(monthInt) {
   return month[monthInt];
 }
 
-/**
+
 main.on('click', 'up', function(e) {
   var menu = new UI.Menu({
     sections: [{
@@ -158,7 +201,7 @@ main.on('click', 'up', function(e) {
   });
   menu.show();
 });
-
+/**
 main.on('click', 'down', function(e) {
   var card = new UI.Card();
   card.title('A Card');
